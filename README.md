@@ -25,4 +25,9 @@ A simple Python desktop application demonstrating a **login and registration sys
 ```bash
 git clone https://github.com/your-username/Login-and-Registration-Demo.git
 cd Login-and-Registration-Demo
+```
+Install The Following Dependenices
+
+pip install pywebview
+
 
