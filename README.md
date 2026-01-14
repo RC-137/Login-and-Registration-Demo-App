@@ -23,8 +23,8 @@ A simple Python desktop application demonstrating a **login and registration sys
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/your-username/Login-and-Registration-Demo.git
-cd Login-and-Registration-Demo
+git clone https://github.com/your-username/Login-and-Registration-Demo-App.git
+cd Login-and-Registration-Demo-App
 ```
 Install The Following Dependenices
 
