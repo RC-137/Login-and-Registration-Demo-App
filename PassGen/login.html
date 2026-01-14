@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Storytelling RC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial;
+        }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+        }
+        
+        .login-container {
+            background: white;
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+        }
+        
+        .login-container h2 {
+            margin-bottom: 25px;
+            color: #333;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 10px 0 20px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2575fc;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #6a11cb;
+        }
+        
+        #register {
+            margin-top: 10px;
+            background: #2575fc;
+        }
+        
+        #register:hover {
+            background-color: #188d81;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Login - Storytelling RC</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <button id="register" href="cred.py">Create Account</button>
+    </div>
+
+    <script>
+        async function tryLogin(username, password) {
+            if (window.pywebview && window.pywebview.api) {
+                return window.pywebview.api.login(username, password);
+            } else {
+                return {
+                    success: false,
+                    message: "Python API not available"
+                };
+            }
+        }
+
+        document.getElementById("login-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const result = await tryLogin(username, password);
+            alert(result.message);
+        });
+
+        document.getElementById("register").addEventListener("click", async function() {
+            if (window.pywebview && window.pywebview.api) {
+                const result = await window.pywebview.api.register();
+                alert(result.message);
+            } else {
+                alert("Python API not available");
+            }
+        });
+    </script>
+</body>
+
+</html>

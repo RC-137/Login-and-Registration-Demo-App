@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration - Storytelling RC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial;
+        }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+        }
+        
+        .register-container {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2575fc;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #6a11cb;
+        }
+        
+        small {
+            display: block;
+            margin-top: 10px;
+            color: #555;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="register-container">
+        <h2>REGISTER</h2>
+
+        <input type="text" id="name" placeholder="Name*" required>
+        <input type="text" id="username" placeholder="Username*" required>
+        <input type="text" id="custom" placeholder="Custom Passkey (optional)">
+        <input type="text" id="length" placeholder="Password Length" value="8">
+
+        <small>Note: Fields marked with * are mandatory.</small>
+
+        <button id="register-btn">Generate Password & Register</button>
+    </div>
+
+    <script>
+        document.getElementById("register-btn").addEventListener("click", async function() {
+            const name = document.getElementById("name").value;
+            const username = document.getElementById("username").value;
+            const custom = document.getElementById("custom").value;
+            const length = document.getElementById("length").value;
+
+            if (window.pywebview && window.pywebview.api) {
+                const result = await window.pywebview.api.register(name, username, custom, length);
+                alert(result.message);
+                if (result.success) {
+                    // Optionally clear the fields
+                    document.getElementById("name").value = "";
+                    document.getElementById("username").value = "";
+                    document.getElementById("custom").value = "";
+                    document.getElementById("length").value = "8";
+                }
+            } else {
+                alert("Python API not available");
+            }
+        });
+    </script>
+</body>
+
+</html>
