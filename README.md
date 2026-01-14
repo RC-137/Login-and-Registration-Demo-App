@@ -28,6 +28,7 @@ cd Login-and-Registration-Demo
 ```
 Install The Following Dependenices
 
+```bash
 pip install pywebview
-
+```
 
