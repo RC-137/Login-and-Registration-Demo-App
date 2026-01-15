@@ -19,7 +19,7 @@ class LoginAPI:
     def register(self):
         # This will run your separate cred.py script
         try:
-            subprocess.Popen(["python", "cred.py"])
+            subprocess.Popen(["python", "creds.py"])
             return {"success": True, "message": "Registration window opened!"}
         except Exception as e:
             return {"success": False, "message": f"Error opening registration: {e}"}
